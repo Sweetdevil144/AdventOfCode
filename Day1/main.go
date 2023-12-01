@@ -11,6 +11,8 @@ import (
 var (
 	a int
 	b int
+	sum1 int
+	sum2 int
 )
 
 func main() {
@@ -20,14 +22,18 @@ func main() {
 		fmt.Println("Error opening file:", err)
 		return
 	}
-	sum := 0
-	defer file.Close()
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+			fmt.Println("Error closing file:", err)
+		}
+	}(file)
 
 	scanner := bufio.NewScanner(file)
 
 	for scanner.Scan() {
-		//sum += partOne(scanner.Text())
-		sum += partTwo(scanner.Text())
+		sum1 += partOne(scanner.Text())
+		sum2 += partTwo(scanner.Text())
 	}
 	fmt.Println("Sum:", sum)
 	if err := scanner.Err(); err != nil {

@@ -45,9 +45,9 @@ func main() {
 	for i := 1; i <= 100; i++ {
 		str := strconv.Itoa(i)
 		sum += partTwo(data, str)
-		//if getResult(data, str) {
-		//	sum += i
-		//}
+		if getResultOne(data, str) {
+			sum += i
+		}
 	}
 	fmt.Println(sum)
 }

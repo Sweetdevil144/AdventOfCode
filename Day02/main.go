@@ -14,7 +14,12 @@ type GameData struct {
 	Green int `json:"green"`
 }
 
-var value bool
+var (
+	value     bool
+	max_red   int
+	max_blue  int
+	max_green int
+)
 
 func main() {
 	var sum = 0
@@ -37,18 +42,36 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Now you can use the data
-	//fmt.Println(data["1"])
 	for i := 1; i <= 100; i++ {
 		str := strconv.Itoa(i)
-		if getResult(data, str) {
-			sum += i
-		}
+		sum += partTwo(data, str)
+		//if getResult(data, str) {
+		//	sum += i
+		//}
 	}
 	fmt.Println(sum)
 }
 
-func getResult(data map[string][]GameData, s string) bool {
+func partTwo(data map[string][]GameData, str string) int {
+	max_red = 0
+	max_blue = 0
+	max_green = 0
+	// Max maximum of red, green and blue in each row of data and return max_red*max_blue*max_green of each row.
+	for j := 0; j < len(data[str]); j++ {
+		if data[str][j].Red > max_red {
+			max_red = data[str][j].Red
+		}
+		if data[str][j].Blue > max_blue {
+			max_blue = data[str][j].Blue
+		}
+		if data[str][j].Green > max_green {
+			max_green = data[str][j].Green
+		}
+	}
+	return max_red * max_blue * max_green
+}
+
+func getResultOne(data map[string][]GameData, s string) bool {
 	for j := 0; j < len(data[s]); j++ {
 		value = getValueOne(data[s][j].Red, data[s][j].Blue, data[s][j].Green)
 		if !value {

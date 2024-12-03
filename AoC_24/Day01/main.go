@@ -33,7 +33,7 @@ func parseInput(filePath string) ([]float64, []float64, error) {
 }
 
 func FirstPuzzle() {
-	left, right, err := parseInput("AoC_24/Day01/input1.txt")
+	left, right, err := parseInput("AoC_24/Day01/input.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -50,7 +50,7 @@ func FirstPuzzle() {
 
 func SecondPuzzle() float64 {
 	var sum float64 = 0
-	left, right, err := parseInput("AoC_24/Day01/input1.txt")
+	left, right, err := parseInput("AoC_24/Day01/input.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
